@@ -78,7 +78,7 @@ class _ContentWidget extends State<ContentWidget> {
                     _FilterWidget(
                       title: 'All',
                       selected:
-                          selected != null ? selected.contains('All') : false,
+                          selected == null || selected == 'All' ? true : false,
                       bloc: BlocProvider.of<HomeBloc>(context),
                     ),
                     _FilterWidget(

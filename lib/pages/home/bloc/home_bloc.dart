@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
 import 'package:resty/models/geocode.dart';
 import 'package:resty/services/repositories/zomato.dart';
@@ -21,12 +22,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
+    LocationPermission permission = await checkPermission();
+    if (permission == LocationPermission.denied) {
+      await requestPermission();
+    }
+    Position position =
+        await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
     if (event is HomeFetched) {
       print('is HomeFetched');
       yield StateLoading();
       try {
-        this._currentData =
-            await repository.getGeocode(lat: '1.290270', lon: '103.851959');
+        this._currentData = await repository.getGeocode(
+            lat: position.latitude.toString(),
+            lon: position.longitude.toString());
         yield StateSuccess(data: this._currentData);
       } catch (err) {
         yield StateFailure(data: err);
@@ -38,8 +47,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield StateLoading();
       if (this._currentData == null) {
         try {
-          this._currentData =
-              await repository.getGeocode(lat: '1.290270', lon: '103.851959');
+          this._currentData = await repository.getGeocode(
+              lat: position.latitude.toString(),
+              lon: position.longitude.toString());
         } catch (err) {
           yield StateFailure(data: err);
         }
