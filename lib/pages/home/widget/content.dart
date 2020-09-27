@@ -127,13 +127,7 @@ class _ContentWidget extends State<ContentWidget> {
                   itemCount: data.nearbyRestaurant.length,
                   itemBuilder: (BuildContext ctxt, int index) {
                     var item = data.nearbyRestaurant[index];
-                    return ItemCard(
-                      title: item.name,
-                      price: '${item.currency} ${item.averageCostForTwo}',
-                      description:
-                          '${item.location.address}, ${item.location.city}',
-                      thumbnail: item.thumb,
-                    );
+                    return ItemCard(restaurant: item);
                   },
                 )
               : Padding(
@@ -171,13 +165,7 @@ class _ContentWidget extends State<ContentWidget> {
                   itemCount: data.nearbyRestaurant.length,
                   itemBuilder: (BuildContext ctxt, int index) {
                     var item = data.nearbyRestaurant[index];
-                    return ItemCard(
-                      title: item.name,
-                      price: '${item.currency} ${item.averageCostForTwo}',
-                      description:
-                          '${item.location.address}, ${item.location.city}',
-                      thumbnail: item.thumb,
-                    );
+                    return ItemCard(restaurant: item);
                   },
                 )
               : Container(),
