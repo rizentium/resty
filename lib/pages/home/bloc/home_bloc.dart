@@ -23,21 +23,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
+    // check location permission
     LocationPermission permission = await checkPermission();
     if (permission == LocationPermission.denied) {
       await requestPermission();
     }
-    Position position =
-        await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
 
+    // set StateLoading before go to other state
+    yield StateLoading();
+
+    // HomeFetched event section
     if (event is HomeFetched) {
-      yield StateLoading();
       try {
+        // get data from endpoint using current position
         this._currentData = await repository.getGeocode(
-            lat: position.latitude.toString(),
-            lon: position.longitude.toString());
+          lat: position.latitude.toString(),
+          lon: position.longitude.toString(),
+        );
 
-        // sort based on popularity
+        // copy _currentData to _currentPopular
         this._currentPopular = new GeocodeModel(
           location: this._currentData.location,
           popularity: this._currentData.popularity,
@@ -45,31 +52,36 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           nearbyRestaurant: this._currentData.nearbyRestaurant.toList(),
         );
 
+        // sort _currentPopular based on aggregateRating
         this._currentPopular.nearbyRestaurant.sort((a, b) => b
             .userRating.aggregateRating
             .compareTo(a.userRating.aggregateRating));
 
         yield StateSuccess(
-            data: this._currentData, popular: this._currentPopular);
+          data: this._currentData,
+          popular: this._currentPopular,
+        );
       } catch (err) {
         yield StateFailure(data: err);
       }
     }
 
+    // HomeFilter event section
     if (event is HomeFilter) {
-      yield StateLoading();
+      // get data from endpoint when _currentData is empty
       if (this._currentData == null) {
         try {
           this._currentData = await repository.getGeocode(
-              lat: position.latitude.toString(),
-              lon: position.longitude.toString());
+            lat: position.latitude.toString(),
+            lon: position.longitude.toString(),
+          );
         } catch (err) {
           yield StateFailure(data: err);
         }
       }
 
+      // if current selected filter is 'All'
       if (event.selected == 'All') {
-        // return success state
         yield StateSuccess(
           data: this._currentData,
           selected: event.selected,
@@ -78,6 +90,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return;
       }
 
+      // if current selected filter other than 'All'
       var result = new GeocodeModel(
           location: this._currentData.location,
           popularity: this._currentData.popularity,
@@ -95,6 +108,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         link: this._currentData.link,
         nearbyRestaurant: result.nearbyRestaurant.toList(),
       );
+
+      // sort nearbyRestaurant based on aggregateRating
       popular.nearbyRestaurant.sort((a, b) =>
           b.userRating.aggregateRating.compareTo(a.userRating.aggregateRating));
 
