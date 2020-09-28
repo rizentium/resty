@@ -15,6 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(StateInitial());
 
   GeocodeModel _currentData;
+  GeocodeModel _currentPopular;
 
   final ZomatoRepository repository = new ZomatoRepository();
 
@@ -30,20 +31,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     if (event is HomeFetched) {
-      print('is HomeFetched');
       yield StateLoading();
       try {
         this._currentData = await repository.getGeocode(
             lat: position.latitude.toString(),
             lon: position.longitude.toString());
-        yield StateSuccess(data: this._currentData);
+
+        // sort based on popularity
+        this._currentPopular = new GeocodeModel(
+          location: this._currentData.location,
+          popularity: this._currentData.popularity,
+          link: this._currentData.link,
+          nearbyRestaurant: this._currentData.nearbyRestaurant.toList(),
+        );
+
+        this._currentPopular.nearbyRestaurant.sort((a, b) => b
+            .userRating.aggregateRating
+            .compareTo(a.userRating.aggregateRating));
+
+        yield StateSuccess(
+            data: this._currentData, popular: this._currentPopular);
       } catch (err) {
         yield StateFailure(data: err);
       }
     }
 
     if (event is HomeFilter) {
-      print('is HomeFiltered');
       yield StateLoading();
       if (this._currentData == null) {
         try {
@@ -56,7 +69,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
 
       if (event.selected == 'All') {
-        yield StateSuccess(data: this._currentData, selected: event.selected);
+        // return success state
+        yield StateSuccess(
+          data: this._currentData,
+          selected: event.selected,
+          popular: this._currentPopular,
+        );
         return;
       }
 
@@ -71,7 +89,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   element.cuisines.split(', ').contains(event.selected))
               .toList());
 
-      yield StateSuccess(data: result, selected: event.selected);
+      var popular = new GeocodeModel(
+        location: this._currentData.location,
+        popularity: this._currentData.popularity,
+        link: this._currentData.link,
+        nearbyRestaurant: result.nearbyRestaurant.toList(),
+      );
+      popular.nearbyRestaurant.sort((a, b) =>
+          b.userRating.aggregateRating.compareTo(a.userRating.aggregateRating));
+
+      yield StateSuccess(
+        data: result,
+        selected: event.selected,
+        popular: popular,
+      );
     }
   }
 }

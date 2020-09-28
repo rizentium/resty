@@ -28,7 +28,7 @@ class _ContentWidget extends State<ContentWidget> {
       }
 
       if (state is StateSuccess) {
-        return _loaded(state.data, state.selected);
+        return _loaded(state.data, state.popular, state.selected);
       }
 
       if (state is StateFailure) {
@@ -39,7 +39,7 @@ class _ContentWidget extends State<ContentWidget> {
     });
   }
 
-  Widget _loaded(GeocodeModel data, String selected) {
+  Widget _loaded(GeocodeModel data, GeocodeModel popular, String selected) {
     return ListView(
       padding: EdgeInsets.only(top: 70),
       children: [
@@ -157,14 +157,14 @@ class _ContentWidget extends State<ContentWidget> {
           constraints: new BoxConstraints(
             maxHeight: 230.0,
           ),
-          child: data.nearbyRestaurant.length > 0
+          child: popular.nearbyRestaurant.length > 0
               ? ListView.builder(
                   primary: false,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: data.nearbyRestaurant.length,
+                  itemCount: popular.nearbyRestaurant.length,
                   itemBuilder: (BuildContext ctxt, int index) {
-                    var item = data.nearbyRestaurant[index];
+                    var item = popular.nearbyRestaurant[index];
                     return ItemCard(restaurant: item);
                   },
                 )
