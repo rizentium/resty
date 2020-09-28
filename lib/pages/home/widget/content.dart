@@ -19,18 +19,26 @@ class _ContentWidget extends State<ContentWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      // set circual loading on initial state
       if (state is StateInitial) {
-        return Text('Initial');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       }
 
+      // set circular loading on loading state
       if (state is StateLoading) {
-        return Text('Loading');
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       }
 
+      // set _onSuccess widget when data loaded successfully
       if (state is StateSuccess) {
-        return _loaded(state.data, state.popular, state.selected);
+        return _onSuccess(state.data, state.popular, state.selected);
       }
 
+      // show error message on failure state
       if (state is StateFailure) {
         return Text('Sorry, pleas check your connection!');
       }
@@ -39,9 +47,9 @@ class _ContentWidget extends State<ContentWidget> {
     });
   }
 
-  Widget _loaded(GeocodeModel data, GeocodeModel popular, String selected) {
+  Widget _onSuccess(GeocodeModel data, GeocodeModel popular, String selected) {
     return ListView(
-      padding: EdgeInsets.only(top: 70),
+      padding: EdgeInsets.only(left: 10.0, top: 70),
       children: [
         // Adobe XD layer: 'Food & Delivery' (text)
         Text(

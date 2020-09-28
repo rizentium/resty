@@ -9,7 +9,7 @@ abstract class HomeEvent extends Equatable {
 class HomeFetched extends HomeEvent {}
 
 class HomeFilter extends HomeEvent {
-  final String selected;
+  final String selected; // selected filter item
 
   HomeFilter(this.selected);
 }

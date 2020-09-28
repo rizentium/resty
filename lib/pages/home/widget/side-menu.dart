@@ -17,7 +17,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
       child: Stack(
         children: <Widget>[
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(0.0, 0.0, 86.0, 812.0),
+            bounds: Rect.fromLTWH(0.0, 0.0, 85.0, 812.0),
             size: Size(86.0, 812.0),
             pinLeft: true,
             pinRight: true,
@@ -259,7 +259,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
             ),
           ),
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(15.0, 640.0, 36.0, 17.0),
+            bounds: Rect.fromLTWH(-20.0, 635.0, 100.0, 25.0),
             size: Size(86.0, 812.0),
             fixedHeight: true,
             child: Transform.rotate(
@@ -279,7 +279,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
             ),
           ),
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(9.0, 535.0, 42.0, 18.0),
+            bounds: Rect.fromLTWH(-20.0, 530.0, 100.0, 25.0),
             size: Size(86.0, 812.0),
             fixedHeight: true,
             child: Transform.rotate(
@@ -299,7 +299,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
             ),
           ),
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(-4.5, 415.0, 68.0, 18.0),
+            bounds: Rect.fromLTWH(-20.0, 400.0, 100.0, 25.0),
             size: Size(86.0, 812.0),
             fixedHeight: true,
             child: Transform.rotate(
@@ -319,7 +319,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
             ),
           ),
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(-1.0, 285.0, 62.0, 18.0),
+            bounds: Rect.fromLTWH(-20.0, 275.0, 100.0, 25.0),
             size: Size(86.0, 812.0),
             fixedHeight: true,
             child: Transform.rotate(
@@ -327,7 +327,7 @@ class _SideMenuWidget extends State<SideMenuWidget> {
               child:
                   // Adobe XD layer: 'My Profile' (text)
                   Text(
-                'My  Profile',
+                'My Profile',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   fontSize: 13,
