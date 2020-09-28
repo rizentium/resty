@@ -17,12 +17,13 @@ class StateLoading extends HomeState {
 
 class StateSuccess extends HomeState {
   final GeocodeModel data;
+  final GeocodeModel popular;
   final String selected;
 
-  StateSuccess({this.data, this.selected});
+  StateSuccess({this.data, this.popular, this.selected});
 
   @override
-  List<Object> get props => [data, selected];
+  List<Object> get props => [data, popular, selected];
 }
 
 class StateFailure extends HomeState {
