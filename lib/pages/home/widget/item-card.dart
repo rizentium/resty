@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:resty/pages/product/Productinfor.dart';
+import 'package:resty/models/restaurant.dart';
+import 'package:resty/pages/product/product.dart';
+import 'package:resty/services/helper/helper.dart';
 
 class ItemCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String description;
-  final String thumbnail;
+  final RestaurantModel restaurant;
   final bool favorited;
+  HelperService helper = new HelperService();
 
-  const ItemCard({
+  ItemCard({
     Key key,
-    @required this.title,
-    @required this.price,
-    @required this.description,
-    @required this.thumbnail,
+    @required this.restaurant,
     this.favorited = false,
   }) : super(key: key);
 
@@ -155,12 +152,13 @@ class ItemCard extends StatelessWidget {
                         borderRadius:
                             BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
                         color: const Color(0xffd8d8d8),
-                        image: this.thumbnail.isEmpty
+                        image: this.restaurant.thumb.isEmpty
                             ? null
                             : DecorationImage(
-                                image: urlValidator(this.thumbnail)
-                                    ? NetworkImage(this.thumbnail)
-                                    : AssetImage(this.thumbnail),
+                                image:
+                                    helper.urlValidator(this.restaurant.thumb)
+                                        ? NetworkImage(this.restaurant.thumb)
+                                        : AssetImage(this.restaurant.thumb),
                                 fit: BoxFit.fill,
                               ),
                       ),
@@ -190,7 +188,7 @@ class ItemCard extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Fresh hamburger with' (text)
                         Text(
-                      this.description,
+                      '${this.restaurant.location.address}, ${this.restaurant.location.city}',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(
@@ -208,7 +206,7 @@ class ItemCard extends StatelessWidget {
                     child:
                         // Adobe XD layer: '$30.00' (text)
                         Text(
-                      this.price,
+                      '${this.restaurant.currency} ${this.restaurant.averageCostForTwo}',
                       style: TextStyle(
                         fontFamily: 'Montserrat-SemiBold',
                         fontSize: 14,
@@ -224,7 +222,7 @@ class ItemCard extends StatelessWidget {
                     child:
                         // Adobe XD layer: 'Chicken Hamburger' (text)
                         Text(
-                      this.title,
+                      this.restaurant.name,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontFamily: 'Roboto',
@@ -247,12 +245,9 @@ class ItemCard extends StatelessWidget {
   _onTap(context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Productinfor()),
+      MaterialPageRoute(
+          builder: (context) => ProductPage(restaurant: this.restaurant)),
     );
-  }
-
-  urlValidator(String url) {
-    return RegExp(r"https://+").hasMatch(url);
   }
 }
 
