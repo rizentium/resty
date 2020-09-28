@@ -19,19 +19,20 @@ class _ProductPage extends State<ProductPage> {
       body: Stack(
         children: <Widget>[
           // Adobe XD layer: 'Product Information' (group)
-          SizedBox(
-            child: Stack(
-              children: <Widget>[
-                FooterWidget(),
-                ButtonNavigator(),
-                Padding(
-                  padding: EdgeInsets.only(top: 70),
+          Stack(
+            children: <Widget>[
+              FooterWidget(),
+              ButtonNavigator(),
+              Padding(
+                padding: EdgeInsets.only(top: 70),
+                child: SizedBox(
+                  height: 425.0,
                   child: ContentWidget(
                     restaurant: widget.restaurant,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ],
       ),

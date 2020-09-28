@@ -1,7 +1,7 @@
 import 'package:adobe_xd/pinned.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:resty/models/restaurant.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:resty/services/helper/helper.dart';
 
 class ContentWidget extends StatefulWidget {
@@ -18,101 +18,166 @@ class _ContentWidgetState extends State<ContentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Pinned.fromSize(
-      bounds: Rect.fromLTWH(0.0, 0.0, 375.0, 560.0),
-      size: Size(375.0, 752.0),
-      pinLeft: true,
-      pinRight: true,
-      pinTop: true,
-      pinBottom: true,
-      child:
-          // Adobe XD layer: 'content' (group)
-          Stack(
-        children: <Widget>[
-          Pinned.fromSize(
-            bounds: Rect.fromLTWH(0.0, 0.0, 375.0, 560.0),
-            size: Size(375.0, 560.0),
-            pinLeft: true,
-            pinRight: true,
-            pinTop: true,
-            pinBottom: true,
-            child:
-                // Adobe XD layer: 'content-background' (shape)
-                Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(44.0),
-                  topRight: Radius.circular(44.0),
-                  bottomRight: Radius.circular(11.0),
-                  bottomLeft: Radius.circular(44.0),
-                ),
-                color: const Color(0xfffcf9f7),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0x1a000000),
-                    offset: Offset(8, -16),
-                    blurRadius: 32,
-                  ),
-                ],
+    // Adobe XD layer: 'content-background' (shape)
+    return Stack(
+      children: <Widget>[
+        Pinned.fromSize(
+          bounds: Rect.fromLTWH(0.0, 0.0, 375.0, 560.0),
+          size: Size(375.0, 560.0),
+          pinLeft: true,
+          pinRight: true,
+          pinTop: true,
+          pinBottom: true,
+          child:
+              // Adobe XD layer: 'content-background' (shape)
+              Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(44.0),
+                topRight: Radius.circular(44.0),
+                bottomRight: Radius.circular(11.0),
+                bottomLeft: Radius.circular(44.0),
               ),
+              color: const Color(0xfffcf9f7),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0x1a000000),
+                  offset: Offset(8, -16),
+                  blurRadius: 32,
+                ),
+              ],
             ),
           ),
-          Pinned.fromSize(
-            bounds: Rect.fromLTWH(32.0, 435.0, 215.0, 133.0),
-            size: Size(375.0, 560.0),
-            pinLeft: true,
-            pinBottom: true,
-            fixedWidth: true,
-            fixedHeight: true,
-            child:
-                // Adobe XD layer: 'List2' (group)
-                Stack(
-              children: <Widget>[
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 79.0, 375.0, 54.0),
-                  size: Size(215.0, 133.0),
-                  pinLeft: true,
-                  pinRight: true,
-                  pinBottom: true,
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Fresh hamburger with' (text)
-                      Text(
-                    '${widget.restaurant.location.address}, ${widget.restaurant.location.city}',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat-Regular',
-                      fontSize: 12,
-                      color: const Color(0xff656565),
-                      height: 1.5,
+        ),
+        Column(
+          children: [
+            // Top notch
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Adobe XD layer: 'Rectangle' (shape)
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 4.0,
+                    width: 24.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2.5),
+                      color: const Color(0xff365eff),
                     ),
-                    textAlign: TextAlign.left,
+                  ),
+                )
+              ],
+            ),
+            // Favorite Button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Stack(
+                    children: <Widget>[
+                      // Adobe XD layer: 'Rectangle' (shape)
+                      Container(
+                        width: 72.0,
+                        height: 48.0,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(32.0),
+                            bottomLeft: Radius.circular(32.0),
+                          ),
+                          color: Color(0xff99adff),
+                        ),
+                        child: Stack(
+                          children: [
+                            // Adobe XD layer: 'Shape' (shape)
+                            SvgPicture.string(
+                              _svg_9750qa,
+                              allowDrawingOutsideViewBox: true,
+                              fit: BoxFit.fill,
+                            ),
+                            // Adobe XD layer: 'Shape' (shape)
+                            SvgPicture.string(
+                              _svg_v0r4hz,
+                              allowDrawingOutsideViewBox: true,
+                              fit: BoxFit.fill,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            // Thumbnail
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Adobe XD layer: 'Mask' (shape)
+                Container(
+                  alignment: Alignment.center,
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                    color: const Color(0xffd8d8d8),
+                    image: widget.restaurant.thumb.isEmpty
+                        ? null
+                        : DecorationImage(
+                            image: helper.urlValidator(widget.restaurant.thumb)
+                                ? NetworkImage(widget.restaurant.thumb)
+                                : AssetImage(widget.restaurant.thumb),
+                            fit: BoxFit.fill,
+                          ),
+                  ),
+                  child: // Adobe XD layer: 'Rectangle' (shape)
+                      Container(
+                    alignment: Alignment.center,
+                    width: 72,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(100.0),
+                        topRight: Radius.circular(32.0),
+                        bottomRight: Radius.circular(100.0),
+                        bottomLeft: Radius.circular(32.0),
+                      ),
+                      color: Color(0x99373737),
+                    ),
+                    child:
+                        // Adobe XD layer: 'Play' (group)
+                        Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // Adobe XD layer: 'Path-10' (shape)
+                        SvgPicture.string(
+                          _svg_7imk1l,
+                          allowDrawingOutsideViewBox: true,
+                          fit: BoxFit.fill,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 34.0, 212.0, 32.0),
-                  size: Size(215.0, 133.0),
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Chicken Hamburger' (text)
-                      Text(
-                    widget.restaurant.name,
-                    style: TextStyle(
-                      fontFamily: 'Roboto',
-                      fontSize: 24,
-                      color: const Color(0xff373737),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 0.0, 83.0, 29.0),
-                  size: Size(215.0, 133.0),
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: '$30.00' (text)
-                      Text(
+              ],
+            ),
+            // Product Detail
+            // Adobe XD layer: 'List2' (group)
+            Container(
+              padding: EdgeInsets.only(
+                left: 30,
+                top: 30,
+                right: 30,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Adobe XD layer: '$30.00' (text)
+                  Text(
                     '${widget.restaurant.currency} ${widget.restaurant.averageCostForTwo}',
                     style: TextStyle(
                       fontFamily: 'Montserrat-SemiBold',
@@ -121,263 +186,37 @@ class _ContentWidgetState extends State<ContentWidget> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                ),
-              ],
-            ),
-          ),
-          Pinned.fromSize(
-            bounds: Rect.fromLTWH(65.0, 8.0, 294.0, 317.0),
-            size: Size(375.0, 560.0),
-            pinRight: true,
-            pinTop: true,
-            fixedWidth: true,
-            fixedHeight: true,
-            child:
-                // Adobe XD layer: 'List1' (group)
-                Stack(
-              children: <Widget>[
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 75.0, 200.0, 200.0),
-                  size: Size(294.0, 317.0),
-                  pinLeft: true,
-                  pinBottom: true,
-                  fixedWidth: true,
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Image' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 245.0, 245.0),
-                        size: Size(245.0, 245.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Mask' (shape)
-                            Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                                Radius.elliptical(9999.0, 9999.0)),
-                            color: const Color(0xffd8d8d8),
-                          ),
-                        ),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 245.0, 245.0),
-                        size: Size(245.0, 245.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Image' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 245.0, 245.0),
-                              size: Size(245.0, 245.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Mask' (shape)
-                                  Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.elliptical(9999.0, 9999.0)),
-                                  color: const Color(0xffd8d8d8),
-                                  image: widget.restaurant.thumb.isEmpty
-                                      ? null
-                                      : DecorationImage(
-                                          image: helper.urlValidator(
-                                                  widget.restaurant.thumb)
-                                              ? NetworkImage(
-                                                  widget.restaurant.thumb)
-                                              : AssetImage(
-                                                  widget.restaurant.thumb),
-                                          fit: BoxFit.fill,
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(65.0, 150.0, 72.0, 48.0),
-                  size: Size(294.0, 317.0),
-                  fixedWidth: true,
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Btn Play' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 72.0, 48.0),
-                        size: Size(72.0, 48.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Rectangle' (shape)
-                            Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(100.0),
-                              topRight: Radius.circular(32.0),
-                              bottomRight: Radius.circular(100.0),
-                              bottomLeft: Radius.circular(32.0),
-                            ),
-                            color: const Color(0x99373737),
-                          ),
-                        ),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(24.0, 12.0, 24.0, 24.0),
-                        size: Size(72.0, 48.0),
-                        fixedWidth: true,
-                        fixedHeight: true,
-                        child:
-                            // Adobe XD layer: 'Play' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 24.0, 24.0),
-                              size: Size(24.0, 24.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'bound' (shape)
-                                  SvgPicture.string(
-                                _svg_9750qa,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(7.9, 4.0, 10.0, 16.0),
-                              size: Size(24.0, 24.0),
-                              pinTop: true,
-                              pinBottom: true,
-                              fixedWidth: true,
-                              child:
-                                  // Adobe XD layer: 'Path-10' (shape)
-                                  SvgPicture.string(
-                                _svg_7imk1l,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(222.0, 8.0, 72.0, 48.0),
-                  size: Size(294.0, 317.0),
-                  pinRight: true,
-                  pinTop: true,
-                  fixedWidth: true,
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Btn heart' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 72.0, 48.0),
-                        size: Size(72.0, 48.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Rectangle' (shape)
-                            Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(32.0),
-                              bottomLeft: Radius.circular(32.0),
-                            ),
-                            color: const Color(0xff99adff),
-                          ),
-                        ),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(24.0, 12.0, 24.0, 24.0),
-                        size: Size(72.0, 48.0),
-                        fixedWidth: true,
-                        fixedHeight: true,
-                        child:
-                            // Adobe XD layer: 'Heart' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 24.0, 24.0),
-                              size: Size(24.0, 24.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Shape' (shape)
-                                  SvgPicture.string(
-                                _svg_9750qa,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(3.0, 4.5, 18.0, 15.0),
-                              size: Size(24.0, 24.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Shape' (shape)
-                                  SvgPicture.string(
-                                _svg_v0r4hz,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(85.0, 0.0, 24.0, 4.0),
-                  size: Size(294.0, 317.0),
-                  pinTop: true,
-                  fixedWidth: true,
-                  fixedHeight: true,
-                  child:
-                      // Adobe XD layer: 'Rectangle' (shape)
-                      Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2.5),
-                      color: const Color(0xff365eff),
+                  // Adobe XD layer: 'Chicken Hamburger' (text)
+                  Text(
+                    widget.restaurant.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 24,
+                      color: const Color(0xff373737),
+                      height: 1.5,
                     ),
+                    textAlign: TextAlign.left,
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+                  // Adobe XD layer: 'Fresh hamburger with' (text)
+                  Text(
+                    '${widget.restaurant.location.address}, ${widget.restaurant.location.city}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: 'Montserrat-Regular',
+                      fontSize: 12,
+                      color: const Color(0xff656565),
+                      height: 2,
+                    ),
+                    textAlign: TextAlign.left,
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
