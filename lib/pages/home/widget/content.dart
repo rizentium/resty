@@ -40,7 +40,21 @@ class _ContentWidget extends State<ContentWidget> {
 
       // show error message on failure state
       if (state is StateFailure) {
-        return Text('Sorry, pleas check your connection!');
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 30.0,
+              ),
+            ),
+            Text('Sorry, pleas check your connection!'),
+          ],
+        );
       }
 
       return Container();
