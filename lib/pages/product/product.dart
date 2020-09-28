@@ -18,20 +18,19 @@ class _ProductPage extends State<ProductPage> {
       backgroundColor: const Color(0xffffffff),
       body: Stack(
         children: <Widget>[
-          Transform.translate(
-            offset: Offset(0.0, 60.0),
-            child:
-                // Adobe XD layer: 'Product Information' (group)
-                SizedBox(
-              child: Stack(
-                children: <Widget>[
-                  FooterWidget(),
-                  ButtonNavigator(),
-                  ContentWidget(
+          // Adobe XD layer: 'Product Information' (group)
+          SizedBox(
+            child: Stack(
+              children: <Widget>[
+                FooterWidget(),
+                ButtonNavigator(),
+                Padding(
+                  padding: EdgeInsets.only(top: 70),
+                  child: ContentWidget(
                     restaurant: widget.restaurant,
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ],

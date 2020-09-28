@@ -4,11 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:resty/models/restaurant.dart';
 import 'package:resty/services/helper/helper.dart';
 
-class ContentWidget extends StatelessWidget {
+class ContentWidget extends StatefulWidget {
   final RestaurantModel restaurant;
-  HelperService helper = new HelperService();
 
   ContentWidget({Key key, this.restaurant}) : super(key: key);
+
+  @override
+  _ContentWidgetState createState() => _ContentWidgetState();
+}
+
+class _ContentWidgetState extends State<ContentWidget> {
+  HelperService helper = new HelperService();
+
   @override
   Widget build(BuildContext context) {
     return Pinned.fromSize(
@@ -51,7 +58,7 @@ class ContentWidget extends StatelessWidget {
             ),
           ),
           Pinned.fromSize(
-            bounds: Rect.fromLTWH(32.0, 373.0, 215.0, 133.0),
+            bounds: Rect.fromLTWH(32.0, 435.0, 215.0, 133.0),
             size: Size(375.0, 560.0),
             pinLeft: true,
             pinBottom: true,
@@ -71,8 +78,8 @@ class ContentWidget extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'Fresh hamburger with' (text)
                       Text(
-                    '${restaurant.location.address}, ${restaurant.location.city}',
-                    maxLines: 5,
+                    '${widget.restaurant.location.address}, ${widget.restaurant.location.city}',
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: 'Montserrat-Regular',
@@ -90,7 +97,7 @@ class ContentWidget extends StatelessWidget {
                   child:
                       // Adobe XD layer: 'Chicken Hamburger' (text)
                       Text(
-                    restaurant.name,
+                    widget.restaurant.name,
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 24,
@@ -106,7 +113,7 @@ class ContentWidget extends StatelessWidget {
                   child:
                       // Adobe XD layer: '$30.00' (text)
                       Text(
-                    '${restaurant.currency} ${restaurant.averageCostForTwo}',
+                    '${widget.restaurant.currency} ${widget.restaurant.averageCostForTwo}',
                     style: TextStyle(
                       fontFamily: 'Montserrat-SemiBold',
                       fontSize: 24,
@@ -182,13 +189,15 @@ class ContentWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.all(
                                       Radius.elliptical(9999.0, 9999.0)),
                                   color: const Color(0xffd8d8d8),
-                                  image: restaurant.thumb.isEmpty
+                                  image: widget.restaurant.thumb.isEmpty
                                       ? null
                                       : DecorationImage(
                                           image: helper.urlValidator(
-                                                  restaurant.thumb)
-                                              ? NetworkImage(restaurant.thumb)
-                                              : AssetImage(restaurant.thumb),
+                                                  widget.restaurant.thumb)
+                                              ? NetworkImage(
+                                                  widget.restaurant.thumb)
+                                              : AssetImage(
+                                                  widget.restaurant.thumb),
                                           fit: BoxFit.fill,
                                         ),
                                 ),
@@ -201,7 +210,7 @@ class ContentWidget extends StatelessWidget {
                   ),
                 ),
                 Pinned.fromSize(
-                  bounds: Rect.fromLTWH(72.0, 150.0, 72.0, 48.0),
+                  bounds: Rect.fromLTWH(65.0, 150.0, 72.0, 48.0),
                   size: Size(294.0, 317.0),
                   fixedWidth: true,
                   fixedHeight: true,
@@ -350,7 +359,7 @@ class ContentWidget extends StatelessWidget {
                   ),
                 ),
                 Pinned.fromSize(
-                  bounds: Rect.fromLTWH(111.0, 0.0, 24.0, 4.0),
+                  bounds: Rect.fromLTWH(85.0, 0.0, 24.0, 4.0),
                   size: Size(294.0, 317.0),
                   pinTop: true,
                   fixedWidth: true,
