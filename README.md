@@ -1,6 +1,60 @@
 # resty
 
-A new Flutter application.
+Resty will help you to find the best dining place near your location.
+
+## Installation
+
+### Requirements
+- [Android SDK](https://developer.android.com/studio/)
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Android Studio](https://developer.android.com/studio/) (Optional)
+- [VS Code](https://code.visualstudio.com/) (Optional)
+
+Make sure Flutter SDK path has registered successfully.
+
+You can check by using your `terminal` or `cmd` using this following command
+```bash
+flutter doctor
+```
+
+You will get this result, if the path has registered correctly
+
+```bash
+Doctor summary (to see all details, run flutter doctor -v):
+[√] Flutter (Channel unknown, 1.20.4, on Microsoft Windows [Version 10.0.19041.508], locale en-ID)
+
+[√] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+[√] Android Studio (version 4.0)
+[√] VS Code (version 1.49.2)
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 1 category.
+```
+
+
+### Clone Repository
+
+You can clone this repository by using git cli
+```bash
+git clone https://github.com/rizentium/resty.git
+```
+
+### Build
+
+Install all dependencies before build the source
+
+```bash
+flutter pub get
+```
+
+Use `flutter` command to build apk
+
+```bash
+flutter build apk
+```
+
+Use `--debug` or `--release` as argument based on your preference
 
 ## Getting Started
 
