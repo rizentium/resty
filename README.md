@@ -56,6 +56,10 @@ flutter build apk
 
 Use `--debug` or `--release` as argument based on your preference
 
+You will see the result at `build/app/outputs/flutter-apk/app-debug.apk`. 
+
+Now you can transfer the apk in your phone or just want to run it in your emulator device.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
